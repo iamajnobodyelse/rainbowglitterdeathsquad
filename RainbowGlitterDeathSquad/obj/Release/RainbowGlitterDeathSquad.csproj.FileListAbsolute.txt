@@ -1,0 +1,8 @@
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\bin\Release\RainbowGlitterDeathSquad.dll
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\bin\Release\RainbowGlitterDeathSquad.pdb
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\bin\Release\RobotInterface.dll
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Release\ResolveAssemblyReference.cache
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Release\RainbowGlitterDeathSquad.dll
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Release\RainbowGlitterDeathSquad.pdb
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Release\RainbowGlitterDeathSquad.Resources.Resource1.resources
+H:\Homework\CSC202\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Release\RainbowGlitterDeathSquad.csproj.GenerateResource.Cache
