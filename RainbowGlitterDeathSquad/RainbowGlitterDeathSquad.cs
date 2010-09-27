@@ -7,7 +7,7 @@ using RobotInterface;
 using System.IO;
 using System.Reflection;
 
-// Just a rough copy to get working
+// Trying to fix edge and kill bot problems
 
 namespace RainbowGlitterDeathSquad
 {
@@ -20,7 +20,7 @@ namespace RainbowGlitterDeathSquad
 
         public string getVersion()
         {
-            return "1.0";
+            return "1.1";
         }
 
         public string getAuthor()
@@ -47,6 +47,7 @@ namespace RainbowGlitterDeathSquad
             sawVictim = false;
             victimDistance = 999;
             atEdge = false;
+            nearEdge = false;
          }
 
         private int RandomNumber(int min, int max)
@@ -70,13 +71,28 @@ namespace RainbowGlitterDeathSquad
                     return new RobotLookAction();
                 case State.LOOKED:
                     state = State.LOOK;
-                    if (sawVictim && victimDistance == 1)
+                    if (sawVictim && victimDistance < 5)
                     {
-                        return new RobotKillAction();
+                        if (sawVictim && victimDistance == 1)
+                        {
+                            sawVictim = false;
+                            return new RobotKillAction();
+                        }
+                        else
+                        {
+                            return new RobotWalkAction();
+                        }
+                    }
+                    else if (nearEdge)
+                    {
+                        nearEdge = false;
+                        return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
                     }
                     else if (atEdge)
                     {
+                        atEdge = false;
                         return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
+
                     }
                     else
                     {
@@ -110,19 +126,30 @@ namespace RainbowGlitterDeathSquad
         bool sawVictim;
         int victimDistance;
         bool atEdge;
+        bool nearEdge;
 
         public void handleEvent(RobotInterface.RobotEvent re)
         {
-            if (re.getRobotEventType() == RobotEvent.Type.LOOK) {
+            if (re.getRobotEventType() == RobotEvent.Type.LOOK) 
+            {
                 RobotLookEvent rle = (RobotLookEvent)re;
                 if (rle.getContactType().Equals(RobotLookEvent.ContactType.ROBOT)) {
                     sawVictim = true;
                     victimDistance = rle.getDistance();
                     atEdge = false;
-                } else if(rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
-                    rle.getDistance() == 1) {
+                }
+                else if (rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
+                    rle.getDistance() < 3)
+                {
+                    nearEdge = true;
+                }
+                else if (rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
+                    rle.getDistance() == 1)
+                {
                     atEdge = true;
-                } else {
+                }
+                else
+                {
                     sawVictim = false;
                     victimDistance = 999;
                 }
