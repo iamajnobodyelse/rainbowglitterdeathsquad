@@ -1,0 +1,8 @@
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\bin\Debug\RainbowGlitterDeathSquad.dll
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\bin\Debug\RainbowGlitterDeathSquad.pdb
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\bin\Debug\RobotInterface.dll
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Debug\RainbowGlitterDeathSquad.Properties.Resources.resources
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Debug\RainbowGlitterDeathSquad.csproj.GenerateResource.Cache
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Debug\RainbowGlitterDeathSquad.dll
+C:\Documents and Settings\jamsmith2\Desktop\RainbowGlitterDeathSquad\RainbowGlitterDeathSquad\obj\Debug\RainbowGlitterDeathSquad.pdb

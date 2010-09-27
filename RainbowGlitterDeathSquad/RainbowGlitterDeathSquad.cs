@@ -7,21 +7,12 @@ using RobotInterface;
 using System.IO;
 using System.Reflection;
 
+// Just a rough copy to get working
+
 namespace RainbowGlitterDeathSquad
 {
-    public class RainbowGlitterDeathSquad
+    public class RainbowGlitterDeathSquad : IRobot
     {
-        public RainbowGlitterDeathSquad()
-        {
-            state = State.INIT;
-            sawVictim = false;
-            victimDistance = 999;
-            atEdge = false;
-        }
-
-        private enum State { INIT = 0, LOOK, LOOKED };
-        private State state;
-
         public string getName()
         {
             return "RainbowGlitterDeathSquad";
@@ -29,15 +20,14 @@ namespace RainbowGlitterDeathSquad
 
         public string getVersion()
         {
-            return "0.9";
+            return "1.0";
         }
 
         public string getAuthor()
         {
             return "Jamie K Smith";
         }
-
-        public System.Drawing.Bitmap getImage()
+        public Bitmap getImage()
         {
             Assembly a = Assembly.GetExecutingAssembly();
             Stream s = a.GetManifestResourceStream("RainbowGlitterDeathSquad.Resources.sailor_moon.png");
@@ -50,6 +40,23 @@ namespace RainbowGlitterDeathSquad
             }
             else { return null; }
         }
+
+        public RainbowGlitterDeathSquad() 
+         {
+            state = State.INIT;
+            sawVictim = false;
+            victimDistance = 999;
+            atEdge = false;
+         }
+
+        private int RandomNumber(int min, int max)
+        {
+        Random random = new Random();
+        return random.Next(min, max);
+        }
+
+        private enum State { INIT = 0, LOOK, LOOKED };
+        private State state;
 
         public RobotInterface.RobotAction takeTurn()
         {
@@ -69,11 +76,31 @@ namespace RainbowGlitterDeathSquad
                     }
                     else if (atEdge)
                     {
-                        return new RobotTurnAction(RobotTurnAction.Direction.RIGHT);
+                        return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
                     }
                     else
                     {
-                        return new RobotWalkAction();
+                        int ConfuseMove = RandomNumber(1, 5);
+                        if (ConfuseMove == 1)
+                        {
+                            return new RobotWalkAction();
+                        }
+                        else if (ConfuseMove == 2)
+                        {
+                            return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
+                        }
+                        else if (ConfuseMove == 3)
+                        {
+                            return new RobotWalkAction();
+                        }
+                        else if (ConfuseMove == 4)
+                        {
+                            return new RobotTurnAction(RobotTurnAction.Direction.RIGHT);
+                        }
+                        else
+                        {
+                            return new RobotWalkAction();
+                        }
                     }
                 default:
                     return new RobotWalkAction();
@@ -86,22 +113,16 @@ namespace RainbowGlitterDeathSquad
 
         public void handleEvent(RobotInterface.RobotEvent re)
         {
-            if (re.getRobotEventType() == RobotEvent.Type.LOOK)
-            {
+            if (re.getRobotEventType() == RobotEvent.Type.LOOK) {
                 RobotLookEvent rle = (RobotLookEvent)re;
-                if (rle.getContactType().Equals(RobotLookEvent.ContactType.ROBOT))
-                {
+                if (rle.getContactType().Equals(RobotLookEvent.ContactType.ROBOT)) {
                     sawVictim = true;
                     victimDistance = rle.getDistance();
                     atEdge = false;
-                }
-                else if (rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
-                    rle.getDistance() == 1)
-                {
+                } else if(rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
+                    rle.getDistance() == 1) {
                     atEdge = true;
-                }
-                else
-                {
+                } else {
                     sawVictim = false;
                     victimDistance = 999;
                 }
