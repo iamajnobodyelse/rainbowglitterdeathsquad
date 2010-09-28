@@ -71,7 +71,7 @@ namespace RainbowGlitterDeathSquad
                     return new RobotLookAction();
                 case State.LOOKED:
                     state = State.LOOK;
-                    if (sawVictim && victimDistance < 5)
+                    if (sawVictim && victimDistance < 10)
                     {
                         if (sawVictim && victimDistance == 1)
                         {
@@ -80,18 +80,44 @@ namespace RainbowGlitterDeathSquad
                         }
                         else
                         {
+                            sawVictim = false;
                             return new RobotWalkAction();
                         }
                     }
                     else if (nearEdge)
                     {
                         nearEdge = false;
-                        return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
+                        int ToGoOrNotToGo = RandomNumber(1, 4);
+                        if (ToGoOrNotToGo == 1)
+                        {
+                            return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
+                        }
+                        else if (ToGoOrNotToGo == 2)
+                        {
+                            return new RobotWalkAction();
+                        }
+                        else if (ToGoOrNotToGo == 3)
+                        {
+                            return new RobotTurnAction(RobotTurnAction.Direction.RIGHT);
+                        }
+                        else
+                        {
+                            return new RobotWalkAction();
+                        }
+
                     }
                     else if (atEdge)
                     {
                         atEdge = false;
-                        return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
+                        int LeftOrRight = RandomNumber(1, 2);
+                        if (LeftOrRight == 1)
+                        {
+                            return new RobotTurnAction(RobotTurnAction.Direction.LEFT);
+                        }
+                        else
+                        {
+                            return new RobotTurnAction(RobotTurnAction.Direction.RIGHT);
+                        }
 
                     }
                     else
@@ -137,16 +163,17 @@ namespace RainbowGlitterDeathSquad
                     sawVictim = true;
                     victimDistance = rle.getDistance();
                     atEdge = false;
-                }
-                else if (rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
-                    rle.getDistance() < 3)
-                {
-                    nearEdge = true;
+                    nearEdge = false;
                 }
                 else if (rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
                     rle.getDistance() == 1)
                 {
                     atEdge = true;
+                }
+                else if (rle.getContactType().Equals(RobotLookEvent.ContactType.EDGE) &&
+                    rle.getDistance() < 3)
+                {
+                    nearEdge = true;
                 }
                 else
                 {
